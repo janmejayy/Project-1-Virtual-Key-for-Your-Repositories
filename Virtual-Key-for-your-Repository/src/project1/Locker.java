@@ -1,12 +1,12 @@
 package project1;
 
-        import java.io.File;
-        import java.io.FileNotFoundException;
-        import java.io.PrintWriter;
-        import java.util.Arrays;
-        import java.util.Collections;
-        import java.util.List;
-        import java.util.Scanner;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Scanner;
 
 public class Locker {
     public static void listingFile() {
@@ -18,14 +18,15 @@ public class Locker {
             System.out.println("Sorting by filename in ascending order");
             for(String s:listFile){
                 System.out.println(s);
+                
             }
             //  just for practice writing in decending order.
-            System.out.println("---------------------------------------");
-            System.out.println("Sorting by filename in descending order");
-            Collections.sort(listFile,Collections.reverseOrder());
-            for(String s:listFile){
-                System.out.println(s);
-            }
+//            System.out.println("---------------------------------------");
+//            System.out.println("Sorting by filename in descending order");
+//            Collections.sort(listFile,Collections.reverseOrder());
+//            for(String s:listFile){
+//                System.out.println(s);
+//            }
 
         }
         else{
@@ -36,13 +37,15 @@ public class Locker {
         Scanner sc = new Scanner(System. in ); //object of Scanner class
         System.out.println("Enter the file name : ");
         String name = sc.nextLine(); //variable name to store the file name
-        File file = new File("D:\\java\\eclipse\\ExceptionHandling\\src\\Virtual Key for Your Repositories\\src\\list\\"+name);
+        File file = new File("D:\\java\\eclipse\\ExceptionHandling\\src\\Virtual Key for Your Repositories\\src\\list"+name);
 
         try {
             if (file.createNewFile()) {
-                System.out.println("File Created!");
+                System.out.println("File Created! :)");
+                Locker.fileMenuOperations();
             } else {
                 System.out.println("File already exists :(");
+                Locker.fileMenuOperations();
             }
         } catch (Exception e) {
             System.out.println(e);
@@ -63,9 +66,11 @@ public class Locker {
 
         if (file.delete()) {
             System.out.println("File deleted successfully");
+            Locker.fileMenuOperations();
         }
         else {
-            System.out.println("Failed to delete the file");
+            System.out.println("Oops !! File not found.Please try again ");
+            Locker.fileMenuOperations();
         }
 
     }
@@ -77,8 +82,11 @@ public class Locker {
 
         if (file.exists()) {
             System.out.println("Yep! File found!");
+            System.out.println(file.getAbsolutePath());
+            Locker.fileMenuOperations();
         } else {
             System.out.println("Sorry, File is not here (File Not Found)");
+            Locker.fileMenuOperations();
         }
 
         try {
@@ -90,7 +98,53 @@ public class Locker {
         }
 
     }
+    public static void mainMenu() {
+    	System.out.println("Please select one the following");
+        System.out.println("1 for current file names in ascending order ");
+        System.out.println("2 for your Business Operation");
+        System.out.println("3 for exit application");
+    	
+    }
+    
+    public static void fileMenuOperations() {
+    	
+    	System.out.println("Please choose one of the following options :");
+        System.out.println("1. Create a file");
+        System.out.println("2. Delete a File");
+        System.out.println("3. Search for a File");
+        System.out.println("4. for main menu");
+       
+    	try {
+    		Scanner sc2=new Scanner(System.in);
+            int choice=sc2.nextInt();
+             switch(choice) {
+             case 1:
+                 System.out.println("You have selected to create file");
+                 createFile();
 
+                 break;
+             case 2:
+                 System.out.println("You have selected to Delete file");
+                 deleteMethod();
+                 break;
+             case 3:
+                 System.out.println("You have Selected to search file");
+                 searchMethod();
+                 break;
+             case 4:
+                 System.out.println("Going back to MainMenu");
+                 Locker.mainMenu();
+         }
+
+        }catch(Exception e) {
+           System.out.println("Oops!! Please Enter valid number");
+          Locker.fileMenuOperations();
+        }
+        
+		
+ 
+    	
+    }
     public static void main(String[] args) {
 
         System.out.println("**********************");
@@ -98,75 +152,40 @@ public class Locker {
         System.out.println(" LockerMe.com");
         System.out.println("Develop by JAY");
         System.out.println("**********************");
-        int option = 0;
-        int choice=0;
-
-        Scanner sc=new Scanner(System.in);
+        
+ Scanner sc=new Scanner(System.in);
+        
+        
 
         while(true) {
-            System.out.println("Please select one the following");
-            System.out.println("1 for current file names in ascending order ");
-            System.out.println("2 for your personal file");
-            System.out.println("3 for exit application");
-            try {
-                option=sc.nextInt();
-            }catch(Exception e){
-                System.out.println("You did not choose valid number please run program again and enter valid number from 1-3");
-                System.exit(option);
-            }
-
-
-            switch(option) {
+        	
+        	Locker.mainMenu();
+            
+           try {
+            	
+              int option=sc.nextInt();
+              switch(option) {
                 case 1 :
                     System.out.println("These are the files in ascending");
                     listingFile();
                     break;
                 case 2 :
-                    System.out.println("You have selected your personal file");
-                    System.out.println("Please choose one of the following options :");
-                    System.out.println("1. Create a file");
-                    System.out.println("2. Delete a File");
-                    System.out.println("3. Search for a File");
-                    try {
-                        choice=sc.nextInt();
-                    }catch(Exception e) {
-                        System.out.println("please run program again and enter valid number");
-                    }
-                    switch(choice) {
-                        case 1:
-                            System.out.println("You have selected option 1");
-                            // String fileCreate=sc.next();
-                            createFile();
-
-                            continue;
-                        case 2:
-                            System.out.println("You have selected to Delete file");
-                            deleteMethod();
-                            continue;
-                        case 3:
-                            System.out.println("You have Selected to search file");
-                            searchMethod();
-                            continue;
-                        case 4:
-                            System.out.println("going back");
-                            break;
-                    }
-
-
-                    break;
+                	Locker.fileMenuOperations();
+                    
                 case 3 :
                     System.out.println("Have a nice day!! Thanks for using locker ");
                     System.out.println("Application closed");
 
-                    System.exit(option);
+                   System.exit(option);
                     break;
-                case 4:
                 default:
                     System.out.println("Oops!! please enter the valid number");
 
             }
-        }
-    }
-
-
+        }catch(Exception e){
+          System.out.println("Oops!! Please Enter valid number");
+         Locker.main(args);
+     }
+}
+}
 }
