@@ -1,5 +1,4 @@
 package project1;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
@@ -10,7 +9,7 @@ import java.util.Scanner;
 
 public class Locker {
     public static void listingFile() {
-        File fileDir = new File("D:\\java\\eclipse\\ExceptionHandling\\src\\Virtual Key for Your Repositories\\src\\list");
+        File fileDir = new File("D:\\java\\eclipse\\ExceptionHandling\\src\\Virtual Key for Your Repositories\\src\\list\\");
         if(fileDir.isDirectory()){
             List <String>listFile = Arrays.asList(fileDir.list());
             Collections.sort(listFile);
@@ -20,6 +19,7 @@ public class Locker {
                 System.out.println(s);
                 
             }
+
             //  just for practice writing in decending order.
 //            System.out.println("---------------------------------------");
 //            System.out.println("Sorting by filename in descending order");
@@ -31,13 +31,14 @@ public class Locker {
         }
         else{
             System.out.println(fileDir.getAbsolutePath() + " is not a directory");
-        }
+        }Locker.mainMenu();
+
     }
     public static void createFile() {
         Scanner sc = new Scanner(System. in ); //object of Scanner class
         System.out.println("Enter the file name : ");
         String name = sc.nextLine(); //variable name to store the file name
-        File file = new File("D:\\java\\eclipse\\ExceptionHandling\\src\\Virtual Key for Your Repositories\\src\\list"+name);
+        File file = new File("D:\\java\\eclipse\\ExceptionHandling\\src\\Virtual Key for Your Repositories\\src\\list\\"+name);
 
         try {
             if (file.createNewFile()) {
@@ -113,9 +114,9 @@ public class Locker {
         System.out.println("2. Delete a File");
         System.out.println("3. Search for a File");
         System.out.println("4. for main menu");
-       
+        Scanner sc2=new Scanner(System.in);
     	try {
-    		Scanner sc2=new Scanner(System.in);
+    		
             int choice=sc2.nextInt();
              switch(choice) {
              case 1:
@@ -134,6 +135,7 @@ public class Locker {
              case 4:
                  System.out.println("Going back to MainMenu");
                  Locker.mainMenu();
+                  break;
          }
 
         }catch(Exception e) {
@@ -156,13 +158,12 @@ public class Locker {
  Scanner sc=new Scanner(System.in);
         
         
-
+         Locker.mainMenu();
         while(true) {
-        	
-        	Locker.mainMenu();
             
-           try {
-            	
+            
+                try {
+        	
               int option=sc.nextInt();
               switch(option) {
                 case 1 :
@@ -171,15 +172,17 @@ public class Locker {
                     break;
                 case 2 :
                 	Locker.fileMenuOperations();
+                	break;
                     
                 case 3 :
-                    System.out.println("Have a nice day!! Thanks for using locker ");
-                    System.out.println("Application closed");
+            	   System.out.println("Have a nice day!! Thanks for using locker ");
+                   System.out.println("Application closed");
 
                    System.exit(option);
                     break;
                 default:
                     System.out.println("Oops!! please enter the valid number");
+                    break;
 
             }
         }catch(Exception e){
