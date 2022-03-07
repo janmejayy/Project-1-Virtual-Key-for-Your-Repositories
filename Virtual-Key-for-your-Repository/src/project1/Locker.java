@@ -1,7 +1,5 @@
 package project1;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.PrintWriter;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -9,8 +7,12 @@ import java.util.Scanner;
 
 public class Locker {
     public static void listingFile() {
-        File fileDir = new File("D:\\java\\eclipse\\ExceptionHandling\\src\\Virtual Key for Your Repositories\\src\\list\\");
-        if(fileDir.isDirectory()){
+    	File fileDir = new File("C:\\locker");
+        //Creating the directory
+        		fileDir.mkdir();
+       
+        
+       if(fileDir.isDirectory()){
             List <String>listFile = Arrays.asList(fileDir.list());
             Collections.sort(listFile);
             System.out.println("---------------------------------------");
@@ -19,8 +21,11 @@ public class Locker {
                 System.out.println(s);
                 
             }
+            }
+            
+      
 
-            //  just for practice writing in decending order.
+//            just for practice writing in decending order.
 //            System.out.println("---------------------------------------");
 //            System.out.println("Sorting by filename in descending order");
 //            Collections.sort(listFile,Collections.reverseOrder());
@@ -28,20 +33,27 @@ public class Locker {
 //                System.out.println(s);
 //            }
 
-        }
         else{
-            System.out.println(fileDir.getAbsolutePath() + " is not a directory");
+           System.out.println(fileDir.getAbsolutePath() + " is not a directory");
         }Locker.mainMenu();
 
-    }
+  }
     public static void createFile() {
-        Scanner sc = new Scanner(System. in ); //object of Scanner class
-        System.out.println("Enter the file name : ");
-        String name = sc.nextLine(); //variable name to store the file name
-        File file = new File("D:\\java\\eclipse\\ExceptionHandling\\src\\Virtual Key for Your Repositories\\src\\list\\"+name);
+//        Scanner sc = new Scanner(System. in ); //object of Scanner class
+//        System.out.println("Enter the file name : ");
+//        String name = sc.nextLine(); //variable name to store the file name
+        File file = new File("C:\\locker");
+        //Creating the directory
+        file.mkdir();
+        
+     
+    Scanner sc = new Scanner(System. in ); //object of Scanner class
+    System.out.println("Enter the file name : ");
+    String name = sc.nextLine(); //variable name to store the file name
+        File file1 = new File("C:\\locker\\"+name);
 
         try {
-            if (file.createNewFile()) {
+            if (file1.createNewFile()) {
                 System.out.println("File Created! :)");
                 Locker.fileMenuOperations();
             } else {
@@ -55,7 +67,7 @@ public class Locker {
 
 
 
-
+    
     public static void deleteMethod() {
         String filename;
         Scanner scan = new Scanner(System.in);
@@ -63,7 +75,7 @@ public class Locker {
         System.out.println("Enter the Name of File to Delete: ");
         filename = scan.nextLine();
 
-        File file= new File("D:\\java\\eclipse\\ExceptionHandling\\src\\Virtual Key for Your Repositories\\src\\list\\"+filename);
+        File file= new File("C:\\locker\\"+filename);
 
         if (file.delete()) {
             System.out.println("File deleted successfully");
@@ -79,24 +91,24 @@ public class Locker {
         System.out.println("Enter the name of the file to Search");
         Scanner s1 = new Scanner(System.in);
         String folderName = s1.next();
-        File file = new File("D:\\java\\eclipse\\ExceptionHandling\\src\\Virtual Key for Your Repositories\\src\\list\\"+folderName);
+        File file = new File("C:\\locker\\"+folderName);
 
         if (file.exists()) {
-            System.out.println("Yep! File found!");
+            System.out.println("Yep! File found!! :)"+"\n"+"This is the file location");
             System.out.println(file.getAbsolutePath());
             Locker.fileMenuOperations();
         } else {
-            System.out.println("Sorry, File is not here (File Not Found)");
+            System.out.println("Sorry, File Not Found :(");
             Locker.fileMenuOperations();
         }
 
-        try {
-            PrintWriter pw = new PrintWriter(file);
-            pw.println("saved");
-            pw.close();
-        } catch (FileNotFoundException e) {
-            System.out.println(e);
-        }
+//        try {
+//            PrintWriter pw = new PrintWriter(file);
+//            pw.println("saved");
+//            pw.close();
+//        } catch (FileNotFoundException e) {
+//            System.out.println(e);
+//        }
 
     }
     public static void mainMenu() {
@@ -156,9 +168,7 @@ public class Locker {
         System.out.println("**********************");
         
  Scanner sc=new Scanner(System.in);
-        
-        
-         Locker.mainMenu();
+        Locker.mainMenu();
         while(true) {
             
             
